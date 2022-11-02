@@ -7,16 +7,6 @@ public enum MoveDirection {
     RIGHT,
     LEFT;
 
-    public static MoveDirection fromString(String dir) {
-        return switch (dir) {
-            case "f" -> FORWARD;
-            case "b" -> BACKWARD;
-            case "r" -> RIGHT;
-            case "l" -> LEFT;
-            default  -> throw new IllegalArgumentException("Invalid MoveDirection string.");
-        };
-    }
-
     public static String toText(MoveDirection dir) {
         return switch(dir) {
             case FORWARD  -> "Zwierzak idzie do przodu";

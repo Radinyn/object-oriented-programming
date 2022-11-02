@@ -22,6 +22,10 @@ public class Vector2d {
         return (this.x >= other.x) && (this.y >= other.y);
     }
 
+    public boolean in_bound(Vector2d low, Vector2d high) {
+        return this.follows(low) && this.precedes(high);
+    }
+
     public Vector2d add(Vector2d other) {
         return new Vector2d(this.x + other.x, this.y + other.y);
     }
