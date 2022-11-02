@@ -1,24 +1,23 @@
 package agh.ics.oop;
 
-public enum Direction {
+public enum MoveDirection {
 
     FORWARD,
     BACKWARD,
     RIGHT,
-    LEFT,
-    INVALID;
+    LEFT;
 
-    public static Direction convertStringToDirection(String dir) {
+    public static MoveDirection fromString(String dir) {
         return switch (dir) {
             case "f" -> FORWARD;
             case "b" -> BACKWARD;
             case "r" -> RIGHT;
             case "l" -> LEFT;
-            default  -> INVALID;
+            default  -> throw new IllegalArgumentException("Invalid MoveDirection string.");
         };
     }
 
-    public static String toText(Direction dir) {
+    public static String toText(MoveDirection dir) {
         return switch(dir) {
             case FORWARD  -> "Zwierzak idzie do przodu";
             case BACKWARD -> "Zwierzak idzie do tyłu";
