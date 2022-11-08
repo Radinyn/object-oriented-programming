@@ -3,6 +3,17 @@ package agh.ics.oop;
 public class Animal {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d position = new Vector2d(2,2);
+    private IWorldMap map;
+
+    public Animal(IWorldMap map, Vector2d initial_position) {
+        this.map = map;
+        this.position = initial_position;
+    }
+
+    public Animal(IWorldMap map) {
+        this.map = map;
+        this.position = new Vector2d(2,2);
+    }
 
     public MapDirection getOrientation() {
         return orientation;
@@ -13,6 +24,15 @@ public class Animal {
     }
 
     public String toString() {
+        return switch(this.orientation) {
+            case NORTH -> "N";
+            case EAST  -> "E";
+            case WEST  -> "W";
+            case SOUTH -> "S";
+        };
+    }
+
+    public String describe() {
         return String.format("Animal(position: %s, direction: %s)", this.position, this.orientation);
     }
 
@@ -26,8 +46,11 @@ public class Animal {
                     unitVector = unitVector.opposite();
                 Vector2d newPosition = this.position.add(unitVector);
 
-                if (newPosition.in_bound(new Vector2d(0, 0), new Vector2d(4, 4)))
+                if (this.map.canMoveTo(newPosition))
+                {
                     this.position = newPosition;
+                    this.map.update(this);
+                }
             }
         }
 
