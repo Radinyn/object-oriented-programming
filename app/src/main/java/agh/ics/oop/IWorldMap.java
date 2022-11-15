@@ -46,6 +46,4 @@ public interface IWorldMap {
      */
     Object objectAt(Vector2d position);
 
-
-    void update(Animal animal);
 }

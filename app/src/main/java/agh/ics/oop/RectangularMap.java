@@ -1,8 +1,7 @@
 package agh.ics.oop;
-import java.util.Arrays;
+import java.util.*;
 
-public class RectangularMap implements IWorldMap {
-
+public class RectangularMap extends AbstractWorldMap {
     private int width;
     private int height;
     private Object[][] map;
@@ -37,28 +36,14 @@ public class RectangularMap implements IWorldMap {
         return true;
     }
 
-    public boolean isOccupied(Vector2d position) {
-        return this.objectAt(position) != null;
-    }
-
-
     public Object objectAt(Vector2d position) {
-        return map[position.y][position.x];
-    }
 
-    public void update(Animal animal) {
-        for (int i = 0; i < height; i++)
+        for (Animal animal : this.animals)
         {
-            for (int j = 0; j < width; j++)
-            {
-                if (this.map[i][j] == animal)
-                {
-                    this.map[i][j] = null;
-                    Vector2d v = animal.getPosition();
-                    this.map[v.y][v.x] = animal;
-                    return;
-                }
-            }
+            if (animal.getPosition().equals(position))
+                return animal;
         }
+
+        return map[position.y][position.x];
     }
 }
