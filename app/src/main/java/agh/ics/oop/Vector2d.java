@@ -1,8 +1,9 @@
 package agh.ics.oop;
+
 import java.util.Objects;
 
 public class Vector2d {
-    
+
     public final int x, y;
 
     public Vector2d(int x, int y) {
@@ -48,9 +49,9 @@ public class Vector2d {
 
     public boolean equals(Object other) {
         if (this == other)
-          return true;
+            return true;
         if (!(other instanceof Vector2d))
-          return false;
+            return false;
         Vector2d that = (Vector2d) other;
         return (that.x == this.x) && (that.y == this.y);
     }

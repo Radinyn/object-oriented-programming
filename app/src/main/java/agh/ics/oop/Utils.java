@@ -1,4 +1,5 @@
 package agh.ics.oop;
+
 import java.util.*;
 
 public class Utils {
@@ -10,5 +11,9 @@ public class Utils {
 
     public static int randint(int min, int max) {
         return (int) ((rng.nextDouble() * (max - min)) + min);
+    }
+
+    public static void shuffle(List<?> collection) {
+        Collections.shuffle(collection, rng);
     }
 }
