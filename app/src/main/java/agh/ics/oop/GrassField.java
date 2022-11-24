@@ -5,7 +5,7 @@ import java.util.*;
 public class GrassField extends AbstractWorldMap {
     private Map<Vector2d, Grass> grass = new HashMap<Vector2d, Grass>();
 
-    GrassField(int grassCount) {
+    public GrassField(int grassCount) {
         int limit = (int) Math.sqrt(grassCount * 10);
 
         List<Vector2d> positions = new ArrayList<>();
@@ -16,31 +16,16 @@ public class GrassField extends AbstractWorldMap {
 
         Utils.shuffle(positions);
 
-        for (int i = 0; i < grassCount; i++)
+        for (int i = 0; i < grassCount; i++) {
             grass.put(positions.get(i), new Grass(positions.get(i)));
+            this.mapBoundary.addPosition(positions.get(i));
+        }
     }
 
     public String toString() {
         MapVisualizer visualizer = new MapVisualizer(this);
-
-        int x_low = -2, y_low = -2;
-        int x_high = 2, y_high = 2;
-
-        for (Vector2d pos : this.animals.keySet()) {
-            x_high = Math.max(x_high, pos.x);
-            y_high = Math.max(y_high, pos.y);
-            x_low = Math.min(x_low, pos.x);
-            y_low = Math.min(y_low, pos.y);
-        }
-
-        for (Vector2d pos : this.grass.keySet()) {
-            x_high = Math.max(x_high, pos.x);
-            y_high = Math.max(y_high, pos.y);
-            x_low = Math.min(x_low, pos.x);
-            y_low = Math.min(y_low, pos.y);
-        }
-
-        return visualizer.draw(new Vector2d(x_low, y_low), new Vector2d(x_high, y_high));
+        Vector2d[] bounds = this.mapBoundary.getBounds();
+        return visualizer.draw(bounds[0], bounds[1]);
     }
 
     public boolean canMoveTo(Vector2d position) {

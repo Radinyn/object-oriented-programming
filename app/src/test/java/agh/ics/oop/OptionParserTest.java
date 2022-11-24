@@ -2,10 +2,11 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OptionParserTest {
         @Test
-        public void Test_next() {
+        public void Test_parsing() {
                 MoveDirection[] input = OptionsParser.parse(new String[] {
                                 "forward",
                                 "backward",
@@ -13,18 +14,11 @@ public class OptionParserTest {
                                 "f",
                                 "b",
                                 "r",
-                                """
-                                                   According to all known laws
-                                                   of aviation,
-                                                   there is no way a bee
-                                                   should be able to fly.
-                                                """,
                                 "r",
                                 "r",
                                 "l",
                                 "l",
                                 "right",
-                                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                                 "left",
                                 "left",
                 });
@@ -46,5 +40,14 @@ public class OptionParserTest {
                 };
                 assert Arrays.equals(input, expected);
 
+        }
+
+        @Test
+        public void Test_exceptions() {
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        OptionsParser.parse(new String[] { "a", "b" });
+                });
+
+                assert exception.getMessage().contains("a is an invalid MoveDirection string.");
         }
 }
