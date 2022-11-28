@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OptionParserTest {
         @Test
         public void Test_parsing() {
-                MoveDirection[] input = OptionsParser.parse(new String[] {
+                MoveDirection[] input = OptionsParser.parse(Arrays.asList(new String[] {
                                 "forward",
                                 "backward",
                                 "backward",
@@ -21,7 +21,7 @@ public class OptionParserTest {
                                 "right",
                                 "left",
                                 "left",
-                });
+                }));
 
                 MoveDirection[] expected = new MoveDirection[] {
                                 MoveDirection.FORWARD,
@@ -45,7 +45,7 @@ public class OptionParserTest {
         @Test
         public void Test_exceptions() {
                 Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-                        OptionsParser.parse(new String[] { "a", "b" });
+                        OptionsParser.parse(Arrays.asList(new String[] { "a", "b" }));
                 });
 
                 assert exception.getMessage().contains("a is an invalid MoveDirection string.");

@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.List;
 
 public class OptionsParser {
-    public static MoveDirection[] parse(List<String> input) {     
+    public static MoveDirection[] parse(List<String> input) {
         return input.stream()
                 .map(dir -> OptionsParser.dirToString(dir))
                 .toArray(MoveDirection[]::new);

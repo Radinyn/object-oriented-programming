@@ -28,10 +28,19 @@ public class Animal extends AbstractWorldMapElement {
 
     public String toString() {
         return switch (this.orientation) {
-            case NORTH -> "N";
-            case EAST -> "E";
-            case WEST -> "W";
-            case SOUTH -> "S";
+            case NORTH -> "↑";
+            case EAST -> "→";
+            case WEST -> "←";
+            case SOUTH -> "↓";
+        };
+    }
+
+    public String getImagePath() {
+        return switch (this.orientation) {
+            case NORTH -> "src/main/resources/up.png";
+            case EAST -> "src/main/resources/right.png";
+            case WEST -> "src/main/resources/left.png";
+            case SOUTH -> "src/main/resources/down.png";
         };
     }
 

@@ -2,11 +2,12 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.*;
 
 public class SimulationTest {
     @Test
     public void mainTest() {
-        MoveDirection[] directions = OptionsParser.parse("f b r l f f r r f f f f f f f f".split(" "));
+        MoveDirection[] directions = OptionsParser.parse(Arrays.asList("f b r l f f r r f f f f f f f f".split(" ")));
         AbstractWorldMap map = new RectangularMap(10, 5);
         Vector2d[] positions = { new Vector2d(2, 2), new Vector2d(3, 4) };
         SimulationEngine engine = new SimulationEngine(directions, map, positions);
@@ -30,7 +31,7 @@ public class SimulationTest {
     public void grassTest() {
         Utils.setSeed(0xBADC0DE);
 
-        MoveDirection[] directions = OptionsParser.parse("f b r l f f r r f f f f f f f f".split(" "));
+        MoveDirection[] directions = OptionsParser.parse(Arrays.asList("f b r l f f r r f f f f f f f f".split(" ")));
         AbstractWorldMap map = new GrassField(10);
         Vector2d[] positions = { new Vector2d(2, 2), new Vector2d(3, 4) };
         SimulationEngine engine = new SimulationEngine(directions, map, positions);
@@ -62,7 +63,8 @@ public class SimulationTest {
     public void collisionTest() {
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            MoveDirection[] directions = OptionsParser.parse("f b r l f f r r f f f f f f f f".split(" "));
+            MoveDirection[] directions = OptionsParser
+                    .parse(Arrays.asList("f b r l f f r r f f f f f f f f".split(" ")));
             AbstractWorldMap map = new GrassField(10);
             Vector2d[] positions = { new Vector2d(2, 2), new Vector2d(2, 2) };
             SimulationEngine engine = new SimulationEngine(directions, map, positions);
