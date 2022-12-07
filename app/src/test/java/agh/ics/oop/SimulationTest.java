@@ -57,4 +57,18 @@ public class SimulationTest {
                  -3: -------------------------
                     """.strip());
     }
+
+    @Test
+    public void collisionTest() {
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            MoveDirection[] directions = OptionsParser.parse("f b r l f f r r f f f f f f f f".split(" "));
+            AbstractWorldMap map = new GrassField(10);
+            Vector2d[] positions = { new Vector2d(2, 2), new Vector2d(2, 2) };
+            SimulationEngine engine = new SimulationEngine(directions, map, positions);
+            engine.run();
+        });
+
+        assert exception.getMessage().contains("Animal cannot be placed at (2,2)");
+    }
 }
